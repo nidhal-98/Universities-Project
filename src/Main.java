@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 	
 	static Scanner sc = new Scanner(System.in);
-	static String countryEntrerd;
+	static String countryEntrerd = " ";;
 	static String databaseName;
 	static String databaseUsername;
 	static String databasePass;
@@ -19,7 +19,7 @@ public class Main {
 		System.out.print("Enter Database Password:  ");
 		databasePass = sc.next();
 		while(menue) {
-			System.out.println("1) backup");
+			System.out.println("\n1) backup");
 			System.out.println("2) Removing Table");
 			System.out.println("3) Print Universities");
 			System.out.println("4) API / Database");
@@ -32,7 +32,8 @@ public class Main {
 			case "1":
 				break;
 			case "2":
-				System.out.print("\n Enter Table Name:  ");
+				JDBC.printTables();
+				System.out.print("\nEnter Table Name:  ");
 				tableName1 = sc.next();
 				JDBC.deleteTable();
 				System.out.println("Done!\n");
@@ -44,7 +45,8 @@ public class Main {
 					System.out.println(APIConsumer.countrySet.get(i));
 				}
 				System.out.print("\nEnter name of the country:  ");
-				Main.countryEntrerd = Main.sc.next();
+				Main.sc.nextLine();
+				Main.countryEntrerd = Main.sc.nextLine();
 				
 				if(APIConsumer.countrySet.stream().anyMatch(c -> c.equalsIgnoreCase(Main.countryEntrerd))) {
 					APIConsumer.APIUniversity();
@@ -58,23 +60,43 @@ public class Main {
 				System.out.println("2. Databse");
 				String select = sc.next();
 				if(select.equalsIgnoreCase("1")) {
+	                System.out.println("************************************************************");
 					System.out.println("\n\t\tThe Countries from API");
+	                System.out.println("\n************************************************************");
 					APIConsumer.APICountries();
 					for(int i=0; i<APIConsumer.countrySet.size(); i++) {
 						System.out.println(APIConsumer.countrySet.get(i));
 					}
 					System.out.println("");
+					if(countryEntrerd.equalsIgnoreCase(" ")) {
+						System.out.println("To print university:");
+						System.out.println("  First, go to Optin #3 to enter country");
+					}
+					else {
+						
+						System.out.println("************************************************************");
+						System.out.println("\n\t\tThe University from API");
+						System.out.println("\n************************************************************");
+						APIConsumer.APIUniversity();
+						System.out.println("");
+					}
 				}
 				else if(select.equalsIgnoreCase("2")) {
-	                System.out.println("************************************************************");
-					System.out.println("\n\t\tThe Countries from Database");
-	                System.out.println("\n************************************************************");
-					JDBC.printCountriesTable();
-	                System.out.println("************************************************************");
-					System.out.println("\n\t\tThe University from Database");
-	                System.out.println("\n************************************************************");
-					JDBC.printUniversityTable();
-					System.out.println("");
+					if(JDBC.table.isEmpty()) {
+						System.out.println("There is no tables");
+					}
+					else {
+						
+						System.out.println("************************************************************");
+						System.out.println("\n\t\tThe Countries from Database");
+						System.out.println("\n************************************************************");
+						JDBC.printCountriesTable();
+						System.out.println("************************************************************");
+						System.out.println("\n\t\tThe University from Database");
+						System.out.println("\n************************************************************");
+						JDBC.printUniversityTable();
+						System.out.println("");
+					}
 				}
 				else {
 					System.err.println("Entre Valid Input");

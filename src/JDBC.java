@@ -1,7 +1,10 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JDBC {
+	static ArrayList<String> table = new ArrayList<String>();
+
 	public static void countriesTable() {
 
 		String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=" + Main.databaseName + ";" + "encrypt=true;"
@@ -21,6 +24,8 @@ public class JDBC {
 			String sql = "IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Countries')\r\n" + "BEGIN\r\n"
 					+ "CREATE TABLE Countries(\r\n" + "Country_Name VARCHAR(50)\r\n" + ");\r\n" + "END\r\n"
 					+ "truncate table Countries \r\n" + "INSERT INTO Countries (Country_Name)\r\n" + "VALUES";
+			
+			table.add("Countries");
 
 			StringBuilder values = new StringBuilder();
 			for (int i = 0; i < APIConsumer.countrySet.size(); i++) {
@@ -70,6 +75,13 @@ public class JDBC {
 			+ "BEGIN\r\n"
 			+ "Drop table " + Main.tableName1 + "\r\n" 
 			+ "END\r\n";
+			
+			if(Main.tableName1.equals("Countries")) {
+				table.remove(0);
+			}
+			else {
+				table.remove(1);
+			}
 
 			PreparedStatement statement = con.prepareStatement(sql);
 
@@ -161,6 +173,8 @@ public class JDBC {
 			+ "INSERT INTO University (name, country, domains, web_pages, alpha_two_code, state_province)\r\n"
 			+ "VALUES(?, ?, ?, ?, ?, ?);";
 
+			table.add("University");
+
 			PreparedStatement statement = con.prepareStatement(sql);
 
 			statement.setString(1, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).name);
@@ -243,6 +257,60 @@ public class JDBC {
 			con.close();
 		} catch (Exception ex) {
 			System.err.println(ex);
+		}
+	}
+	
+	
+	
+	public static void printTables() {
+		try {
+			String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=" + Main.databaseName + ";"
+					+ "encrypt=true;" + "trustServerCertificate=true";
+			String username = Main.databaseUsername;
+			String password = Main.databasePass;
+			Connection conn = DriverManager.getConnection(url, username, password);
+
+			DatabaseMetaData metadata = conn.getMetaData();
+			String[] types = { "TABLE" };
+			ResultSet resultSet = metadata.getTables(null, null, "%", types);
+
+			while (resultSet.next()) {
+				String tableName = resultSet.getString("TABLE_NAME");
+				if (!tableName.equalsIgnoreCase("trace_xe_action_map")
+						&& !tableName.equalsIgnoreCase("trace_xe_event_map")) {
+					System.out.println("Table Name:  " + tableName);
+				}
+			}
+
+			// Close the connection
+			conn.close();
+		} catch (Exception ex) {
+		}
+	}
+	
+	public static void checkTables() {
+		try {
+			// Connect to the database
+			String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=" + Main.databaseName + ";"
+					+ "encrypt=true;" + "trustServerCertificate=true";
+			String username = Main.databaseUsername;
+			String password = Main.databasePass;
+			Connection conn = DriverManager.getConnection(url, username, password);
+
+			DatabaseMetaData metadata = conn.getMetaData();
+			String[] types = { "TABLE" };
+			ResultSet resultSet = metadata.getTables(null, null, "%", types);
+
+			while (resultSet.next()) {
+				String tableName = resultSet.getString("TABLE_NAME");
+				if (!tableName.equalsIgnoreCase("trace_xe_action_map") && !tableName.equalsIgnoreCase("trace_xe_event_map")) {
+					table.add(tableName);
+				}
+			}
+
+			// Close the connection
+			conn.close();
+		} catch (Exception ex) {
 		}
 	}
 }

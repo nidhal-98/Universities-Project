@@ -41,6 +41,7 @@ public class APIConsumer {
             for(int i=0; i< unversityArr.length; i++) {
                 Unversity newUnversity = unversityArr[i];
                 String countryName = newUnversity.country;
+                countryName = countryName.replaceAll(" ", "+");
                 if (!countrySet.contains(countryName) && !countryName.equals("Israel")) {
                     countrySet.add(countryName);
                 }
@@ -89,7 +90,7 @@ public class APIConsumer {
                 for(int j=0; j<newUnversity.domains.length; j++) {                	
                 	 System.out.print(newUnversity.domains[j] + ", ");
                 }
-                System.out.print("\n     UniversityUniversity Web Page: ");
+                System.out.print("\n     University Web Page: ");
                 for(int j=0; j<newUnversity.web_pages.length; j++) {                	
                 	 System.out.print(newUnversity.web_pages[j] + ", ");
                 }
@@ -102,4 +103,6 @@ public class APIConsumer {
             e.printStackTrace();
         }
     }
+    
+    
 }
