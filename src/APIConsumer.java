@@ -2,16 +2,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
 public class APIConsumer {
-    static HashSet<String> countrySet = new HashSet<String>();
+    static ArrayList<String> countrySet = new ArrayList<String>();
     
     public static void APICountries() {
         String apiUrl = "http://universities.hipolabs.com/search?country=";
         try {
+        	countrySet.clear();
             URL url = new URL(apiUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -40,11 +41,10 @@ public class APIConsumer {
                 Unversity newUnversity = unversityArr[i];
                 String countryName = newUnversity.country;
                 if (!countrySet.contains(countryName) && !countryName.equals("Israel")) {
-                    System.out.println(countryName);
                     countrySet.add(countryName);
                 }
             }
-            
+			JDBC.countriesTable();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +81,18 @@ public class APIConsumer {
 
             for(int i=0; i< unversityArr.length; i++) {
                 Unversity newUnversity = unversityArr[i];
-                System.out.println(newUnversity.name);
+                System.out.print((i+1) + ".   Unversity Name: " + newUnversity.name);
+                System.out.print("\n     Unversity Two Code: " + newUnversity.alpha_two_code);
+                System.out.print("\n     Unversity State-Province: " + newUnversity.state_province);
+                System.out.print("\n     Unversity Domains: ");
+                for(int j=0; j<newUnversity.domains.length; j++) {                	
+                	 System.out.print(newUnversity.domains[j] + ", ");
+                }
+                System.out.print("\n     Unversity Web Page: ");
+                for(int j=0; j<newUnversity.web_pages.length; j++) {                	
+                	 System.out.print(newUnversity.web_pages[j] + ", ");
+                }
+                System.out.println("\n -------------------------------------------------------------------------------------------");
             }
             
         } catch (Exception e) {
