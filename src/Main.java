@@ -7,6 +7,8 @@ public class Main {
 	static String databaseName;
 	static String databaseUsername;
 	static String databasePass;
+	
+	static String tableName1;
 
 	public static void main(String[] args) {
 		boolean menue = true;
@@ -22,13 +24,18 @@ public class Main {
 			System.out.println("3) Print Universities");
 			System.out.println("4) API / Database");
 			System.out.println("5) Search");
-			System.out.print("\n Enter Number:  ");
+			System.out.println("*********************");
+			System.out.print("Enter Number:  ");
 			String option = sc.next();
 			
 			switch (option) {
 			case "1":
 				break;
 			case "2":
+				System.out.print("\n Enter Table Name:  ");
+				tableName1 = sc.next();
+				JDBC.deleteTable();
+				System.out.println("Done!\n");
 				break;
 			case "3":
 		    	System.out.println("Wait a moment :)");
@@ -44,6 +51,33 @@ public class Main {
 				}
 				else {
 					System.out.println(Main.countryEntrerd + " is not in the list!\n");
+				}
+				break;
+			case "4":
+				System.out.println("1. API");
+				System.out.println("2. Databse");
+				String select = sc.next();
+				if(select.equalsIgnoreCase("1")) {
+					System.out.println("\n\t\tThe Countries from API");
+					APIConsumer.APICountries();
+					for(int i=0; i<APIConsumer.countrySet.size(); i++) {
+						System.out.println(APIConsumer.countrySet.get(i));
+					}
+					System.out.println("");
+				}
+				else if(select.equalsIgnoreCase("2")) {
+	                System.out.println("************************************************************");
+					System.out.println("\n\t\tThe Countries from Database");
+	                System.out.println("\n************************************************************");
+					JDBC.printCountriesTable();
+	                System.out.println("************************************************************");
+					System.out.println("\n\t\tThe University from Database");
+	                System.out.println("\n************************************************************");
+					JDBC.printUniversityTable();
+					System.out.println("");
+				}
+				else {
+					System.err.println("Entre Valid Input");
 				}
 				break;
 			}

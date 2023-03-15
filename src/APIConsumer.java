@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 public class APIConsumer {
     static ArrayList<String> countrySet = new ArrayList<String>();
+    static ArrayList<Unversity> unversitiesList = new ArrayList<Unversity>();
     
     public static void APICountries() {
         String apiUrl = "http://universities.hipolabs.com/search?country=";
@@ -81,18 +82,20 @@ public class APIConsumer {
 
             for(int i=0; i< unversityArr.length; i++) {
                 Unversity newUnversity = unversityArr[i];
-                System.out.print((i+1) + ".   Unversity Name: " + newUnversity.name);
-                System.out.print("\n     Unversity Two Code: " + newUnversity.alpha_two_code);
-                System.out.print("\n     Unversity State-Province: " + newUnversity.state_province);
-                System.out.print("\n     Unversity Domains: ");
+                System.out.print((i+1) + ".   University Name: " + newUnversity.name);
+                System.out.print("\n     University Two Code: " + newUnversity.alpha_two_code);
+                System.out.print("\n     University State-Province: " + newUnversity.state_province);
+                System.out.print("\n     University Domains: ");
                 for(int j=0; j<newUnversity.domains.length; j++) {                	
                 	 System.out.print(newUnversity.domains[j] + ", ");
                 }
-                System.out.print("\n     Unversity Web Page: ");
+                System.out.print("\n     UniversityUniversity Web Page: ");
                 for(int j=0; j<newUnversity.web_pages.length; j++) {                	
                 	 System.out.print(newUnversity.web_pages[j] + ", ");
                 }
                 System.out.println("\n -------------------------------------------------------------------------------------------");
+                unversitiesList.add(newUnversity);
+                JDBC.universitiesTable();
             }
             
         } catch (Exception e) {
