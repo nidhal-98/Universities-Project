@@ -1,219 +1,75 @@
 ************************************************************
 
-		The Countries from API
+		The Universities from API
 
 ************************************************************
-France
-United+States
-India
-Canada
-United+Kingdom
-Afghanistan
-Albania
-Algeria
-Andorra
-Angola
-Antigua+and+Barbuda
-Argentina
-Armenia
-Australia
-Austria
-Azerbaijan
-Bahamas
-Bahrain
-Bangladesh
-Barbados
-Belarus
-Belgium
-Belize
-Benin
-Bermuda
-Bhutan
-Bolivia,+Plurinational+State+of
-Bosnia+and+Herzegovina
-Botswana
-Brazil
-Brunei+Darussalam
-Bulgaria
-Burkina+Faso
-Myanmar
-Burundi
-Cambodia
-Cameroon
-Cape+Verde
-Cayman+Islands
-Central+African+Republic
-Chad
-Chile
-China
-Colombia
-Congo,+the+Democratic+Republic+of+the
-Congo
-Costa+Rica
-Côte+d'Ivoire
-Iran
-Poland
-Croatia
-Cuba
-Cyprus
-Czech+Republic
-Denmark
-Djibouti
-Dominica
-Dominican+Republic
-Ecuador
-Egypt
-El+Salvador
-Equatorial+Guinea
-Eritrea
-Estonia
-Ethiopia
-Faroe+Islands
-Fiji
-Finland
-French+Guiana
-French+Polynesia
-Gabon
-Gambia
-Georgia
-Germany
-Ghana
-Greece
-Greenland
-Grenada
-Guadeloupe
-Guam
-Guatemala
-Guinea
-Guyana
-Haiti
-Holy+See+(Vatican+City+State)
-Honduras
-Hong+Kong
-Hungary
-Iceland
-Pakistan
-Indonesia
-Iraq
-Ireland
-Italy
-Jamaica
-Japan
-Jordan
-Kazakhstan
-Kenya
-Korea,+Democratic+People's+Republic+of
-Korea,+Republic+of
-Kosovo
-Kuwait
-Kyrgyzstan
-Lao+People's+Democratic+Republic
-Latvia
-Lebanon
-Lesotho
-Liberia
-Libya
-Liechtenstein
-Lithuania
-Luxembourg
-Macao
-North+Macedonia
-Madagascar
-Malawi
-Malaysia
-Maldives
-Mali
-Malta
-Martinique
-Mauritania
-Mauritius
-Mexico
-Moldova,+Republic+of
-Monaco
-Mongolia
-Montenegro
-Montserrat
-Morocco
-Mozambique
-Namibia
-Nepal
-Netherlands
-New+Caledonia
-New+Zealand
-Nicaragua
-Niger
-Nigeria
-Niue
-Norway
-Oman
-Palestine,+State+of
-Panama
-Papua+New+Guinea
-Paraguay
-Peru
-Philippines
-Portugal
-Puerto+Rico
-Qatar
-Réunion
-Romania
-Russian+Federation
-Rwanda
-Saint+Kitts+and+Nevis
-Saint+Lucia
-Saint+Vincent+and+the+Grenadines
-Samoa
-San+Marino
-Saudi+Arabia
-Senegal
-Serbia
-Seychelles
-Sierra+Leone
-Singapore
-Slovakia
-Slovenia
-Solomon+Islands
-Somalia
-South+Africa
-South+Sudan
-Spain
-Sri+Lanka
-Sudan
-Suriname
-Swaziland
-Sweden
-Switzerland
-Syrian+Arab+Republic
-Taiwan
-Tajikistan
-Tanzania,+United+Republic+of
-Thailand
-Togo
-Tonga
-Trinidad+and+Tobago
-Tunisia
-Turkey
-Turkmenistan
-Turks+and+Caicos+Islands
-Uganda
-Ukraine
-United+Arab+Emirates
-Uruguay
-Uzbekistan
-Venezuela,+Bolivarian+Republic+of
-Viet+Nam
-Virgin+Islands,+British
-Yemen
-Zambia
-Zimbabwe
-UK
-
+1.   University Name: HULT Business School
+     University Two Code: UK
+     University State-Province: null
+     University Domains: hult.edu, 
+     University Web Page: https://www.hult.edu/campuses/london/postgraduate/, 
+ -------------------------------------------------------------------------------------------
+2.   University Name: HULT Business School
+     University Two Code: UK
+     University State-Province: null
+     University Domains: hult.edu, 
+     University Web Page: https://www.hult.edu/campuses/london/postgraduate/, 
+ -------------------------------------------------------------------------------------------
 ************************************************************
 
 		The Universities from API
-************************************************************
 
- OM
+************************************************************
+1.   University Name: Arab Open University
+     University Two Code: OM
+     University State-Province: null
+     University Domains: aou.edu.om, 
+     University Web Page: http://www.aou.edu.om/, 
+ -------------------------------------------------------------------------------------------
+2.   University Name: Al-Buraimi University College
+     University Two Code: OM
+     University State-Province: null
+     University Domains: buc.edu.om, 
+     University Web Page: http://www.buc.edu.om/, 
+ -------------------------------------------------------------------------------------------
+3.   University Name: Dhofar University
+     University Two Code: OM
+     University State-Province: null
+     University Domains: du.edu.om, 
+     University Web Page: http://www.du.edu.om/, 
+ -------------------------------------------------------------------------------------------
+4.   University Name: Ibra College of Technology
+     University Two Code: OM
+     University State-Province: null
+     University Domains: ict.edu.om, 
+     University Web Page: http://www.ict.edu.om/, 
+ -------------------------------------------------------------------------------------------
+5.   University Name: Majan University College
+     University Two Code: OM
+     University State-Province: null
+     University Domains: majancollege.edu.om, 
+     University Web Page: http://www.majancollege.edu.om/, 
+ -------------------------------------------------------------------------------------------
+6.   University Name: Muscat College
+     University Two Code: OM
+     University State-Province: null
+     University Domains: muscatcollege.edu.om, 
+     University Web Page: http://www.muscatcollege.edu.om/, 
+ -------------------------------------------------------------------------------------------
+7.   University Name: Oman College Of Management & Technology
+     University Two Code: OM
+     University State-Province: null
+     University Domains: omancollege.edu.om, 
+     University Web Page: http://www.omancollege.edu.om/, 
+ -------------------------------------------------------------------------------------------
+8.   University Name: Sohar University
+     University Two Code: OM
+     University State-Province: null
+     University Domains: soharuni.edu.om, 
+     University Web Page: http://www.soharuni.edu.om/, 
+ -------------------------------------------------------------------------------------------
+9.   University Name: Sultan Qaboos University
+     University Two Code: OM
      University State-Province: null
      University Domains: squ.edu.om, 
      University Web Page: http://www.squ.edu.om/, 

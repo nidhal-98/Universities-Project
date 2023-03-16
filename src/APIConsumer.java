@@ -184,7 +184,10 @@ public class APIConsumer {
             // Use myObj for further processing
 
             try {
-				FileWriter writer = new FileWriter("University_API.txt", true);
+				FileWriter writer = new FileWriter("Universities_API.txt", true);
+				writer.write("************************************************************\n");
+				writer.write("\n\t\tThe Universities from API\n");
+				writer.write("\n************************************************************\n");
 	            for(int i=0; i< unversityArr.length; i++) {
 	                Unversity newUnversity = unversityArr[i];
 	                writer.write((i+1) + ".   University Name: " + newUnversity.name);

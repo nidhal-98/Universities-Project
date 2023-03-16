@@ -115,7 +115,7 @@ public class Main {
 							System.out.println("");
 						}
 						try {
-						FileWriter writer = new FileWriter("University_API.txt", false);
+						FileWriter writer = new FileWriter("Countries_API.txt", false);
 		                writer.write("************************************************************\n");
 		                writer.write("\n\t\tThe Countries from API\n");
 		                writer.write("\n************************************************************\n");
@@ -127,9 +127,6 @@ public class Main {
 							writer.write("To print university:\n");
 							writer.write("  First, go to Optin #3 to enter country\n");
 						}else {
-							writer.write("************************************************************\n");
-							writer.write("\n\t\tThe Universities from API");
-							writer.write("\n************************************************************\n");
 							APIConsumer.APIUniversityIntoFile();
 							writer.write("\n");
 						}
