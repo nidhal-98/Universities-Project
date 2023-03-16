@@ -88,6 +88,9 @@ public class JDBC {
 			statement.executeUpdate();
 			statement.close();
 			con.close();
+			
+			System.out.println("Deleted Successfully :)");
+
 		} catch (Exception ex) {
 			System.err.println(ex);
 		}
@@ -313,4 +316,39 @@ public class JDBC {
 		} catch (Exception ex) {
 		}
 	}
+	
+	public static void backup() {
+
+		String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=" + Main.databaseName + ";" + "encrypt=true;"
+				+ "trustServerCertificate=true";
+
+		String user = /* "sa" */ Main.databaseUsername;
+		String pass = /* "root" */ Main.databasePass;
+
+		Connection con = null;
+		try {
+
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			DriverManager.registerDriver(driver);
+
+			con = DriverManager.getConnection(url, user, pass);
+
+			String sql = "BACKUP DATABASE " + Main.databaseName + "\r\n"
+					+ "TO DISK = 'C:\\Users\\Lenovo\\eclipse-workspace\\UniversitiesProject\\" + Main.databaseName + ".bak'\r\n"
+					+ "WITH DESCRIPTION = 'Full Backup for" + Main.databaseName + " Database'";
+			
+	
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			statement.executeUpdate();
+
+			statement.close();
+			con.close();
+			
+			System.out.println("Backup Successfully :)");
+		} catch (Exception ex) {
+			System.err.println(ex);
+		}
+	}
+	
 }

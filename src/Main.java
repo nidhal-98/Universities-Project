@@ -30,13 +30,13 @@ public class Main {
 			
 			switch (option) {
 			case "1":
+				JDBC.backup();
 				break;
 			case "2":
 				JDBC.printTables();
 				System.out.print("\nEnter Table Name:  ");
 				tableName1 = sc.next();
 				JDBC.deleteTable();
-				System.out.println("Done!\n");
 				break;
 			case "3":
 		    	System.out.println("Wait a moment :)");
@@ -75,7 +75,7 @@ public class Main {
 					else {
 						
 						System.out.println("************************************************************");
-						System.out.println("\n\t\tThe University from API");
+						System.out.println("\n\t\tThe Universities from API");
 						System.out.println("\n************************************************************");
 						APIConsumer.APIUniversity();
 						System.out.println("");
