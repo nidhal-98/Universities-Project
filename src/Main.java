@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -94,25 +96,49 @@ public class Main {
 				System.out.println("2. Databse");
 				String select = sc.next();
 				if(select.equalsIgnoreCase("1")) {
-	                System.out.println("************************************************************");
-					System.out.println("\n\t\tThe Countries from API");
-	                System.out.println("\n************************************************************");
-					APIConsumer.APICountries();
-					for(int i=0; i<APIConsumer.countrySet.size(); i++) {
-						System.out.println(APIConsumer.countrySet.get(i));
-					}
-					System.out.println("");
-					if(countryEntrerd.equalsIgnoreCase(" ")) {
-						System.out.println("To print university:");
-						System.out.println("  First, go to Optin #3 to enter country");
-					}
-					else {
-						
-						System.out.println("************************************************************");
-						System.out.println("\n\t\tThe Universities from API");
-						System.out.println("\n************************************************************");
-						APIConsumer.APIUniversity();
+		                System.out.println("************************************************************");
+						System.out.println("\n\t\tThe Countries from API");
+		                System.out.println("\n************************************************************");
+		                APIConsumer.APICountries();
+						for(int i=0; i<APIConsumer.countrySet.size(); i++) {
+							System.out.println(APIConsumer.countrySet.get(i));
+						}
 						System.out.println("");
+						if(countryEntrerd.equalsIgnoreCase(" ")) {
+							System.out.println("To print university:");
+							System.out.println("  First, go to Optin #3 to enter country");
+						}else {
+							System.out.println("************************************************************");
+							System.out.println("\n\t\tThe Universities from API");
+							System.out.println("\n************************************************************");
+							APIConsumer.APIUniversity();
+							System.out.println("");
+						}
+						try {
+						FileWriter writer = new FileWriter("University_API.txt", false);
+		                writer.write("************************************************************\n");
+		                writer.write("\n\t\tThe Countries from API\n");
+		                writer.write("\n************************************************************\n");
+						for(int i=0; i<APIConsumer.countrySet.size(); i++) {
+							writer.write(APIConsumer.countrySet.get(i) + "\n");
+						}
+						writer.write("\n");
+						if(countryEntrerd.equalsIgnoreCase(" ")) {
+							writer.write("To print university:\n");
+							writer.write("  First, go to Optin #3 to enter country\n");
+						}else {
+							writer.write("************************************************************\n");
+							writer.write("\n\t\tThe Universities from API");
+							writer.write("\n************************************************************\n");
+							APIConsumer.APIUniversityIntoFile();
+							writer.write("\n");
+						}
+		                
+						writer.close();
+						System.out.println("Successfully wrote to the file.");
+					} catch (IOException e) {
+						System.out.println("An error occurred.");
+						e.printStackTrace();
 					}
 				}
 				else if(select.equalsIgnoreCase("2")) {
@@ -148,7 +174,7 @@ public class Main {
 				String countryName = sc.next();
 				for(int i=0; i<APIConsumer.unversitiesHashList.size(); i++) {
 					if(APIConsumer.unversitiesHashList.get(i).country.equalsIgnoreCase(countryName)) {
-		                System.out.print((i+1) + ".   University Name: " + APIConsumer.unversitiesHashList.get(i).name);
+		                System.out.print("     University Name: " + APIConsumer.unversitiesHashList.get(i).name);
 		                System.out.print("\n     University Two Code: " + APIConsumer.unversitiesHashList.get(i).alpha_two_code);
 		                System.out.print("\n     University State-Province: " + APIConsumer.unversitiesHashList.get(i).state_province);
 		                System.out.print("\n     University Domains: ");
