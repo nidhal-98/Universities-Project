@@ -164,34 +164,34 @@ public class JDBC {
 			con = DriverManager.getConnection(url, user, pass);
 
 			String sql = "IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'University')\r\n" 
-			+ "BEGIN\r\n"
-			+ "CREATE TABLE University(\r\n" 
-			+ "alpha_two_code VARCHAR(50),\r\n" 
-			+ "name VARCHAR(MAX),\r\n"
-			+ "country VARCHAR(50),\r\n" 
-			+ "domains VARCHAR(50),\r\n"
-			+ "web_pages VARCHAR(50),\r\n" 
-			+ "state_province VARCHAR(50)\r\n" 
-			+ ");\r\n" 
-			+ "END\r\n"
-			+ "INSERT INTO University (name, country, domains, web_pages, alpha_two_code, state_province)\r\n"
-			+ "VALUES(?, ?, ?, ?, ?, ?);";
-
-			table.add("University");
+			        + "BEGIN\r\n"
+			        + "CREATE TABLE University(\r\n" 
+			        + "alpha_two_code VARCHAR(50),\r\n" 
+			        + "name VARCHAR(MAX),\r\n"
+			        + "country VARCHAR(50),\r\n" 
+			        + "domains VARCHAR(50),\r\n"
+			        + "web_pages VARCHAR(50),\r\n" 
+			        + "state_province VARCHAR(50)\r\n" 
+			        + ");\r\n" 
+			        + "END\r\n"
+			        + "MERGE INTO University AS target\r\n"
+			        + "USING (SELECT ?, ?, ?, ?, ?, ?) AS source (name, country, domains, web_pages, alpha_two_code, state_province)\r\n"
+			        + "ON (target.name = source.name)\r\n"
+			        + "WHEN MATCHED THEN\r\n"
+			        + "UPDATE SET name = source.name, domains = source.domains, web_pages = source.web_pages, alpha_two_code = source.alpha_two_code, state_province = source.state_province\r\n"
+			        + "WHEN NOT MATCHED THEN\r\n"
+			        + "INSERT (name, country, domains, web_pages, alpha_two_code, state_province)\r\n"
+			        + "VALUES (source.name, source.country, source.domains, source.web_pages, source.alpha_two_code, source.state_province);";
 
 			PreparedStatement statement = con.prepareStatement(sql);
-
 			statement.setString(1, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).name);
 			statement.setString(2, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).country);
 			statement.setString(3, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).domains[0]);
-			statement.setString(4,
-					APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).web_pages[0]);
-			statement.setString(5,
-					APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).alpha_two_code);
-			statement.setString(6,
-					APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).state_province);
-
+			statement.setString(4, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).web_pages[0]);
+			statement.setString(5, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).alpha_two_code);
+			statement.setString(6, APIConsumer.unversitiesList.get(APIConsumer.unversitiesList.size() - 1).state_province);
 			statement.executeUpdate();
+
 
 			// Close the PreparedStatement object
 			statement.close();
