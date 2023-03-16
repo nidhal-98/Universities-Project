@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +15,7 @@ public class Main {
 	static String tableName1;
 
 	public static void main(String[] args) {
+				
 		boolean menue = true;
 		System.out.print("Enter Database Name:      ");
 		databaseName = sc.next();
@@ -33,10 +38,39 @@ public class Main {
 				JDBC.backup();
 				break;
 			case "2":
-				JDBC.printTables();
-				System.out.print("\nEnter Table Name:  ");
-				tableName1 = sc.next();
-				JDBC.deleteTable();
+				try {
+					String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=" + Main.databaseName + ";"
+							+ "encrypt=true;" + "trustServerCertificate=true";
+					String username = Main.databaseUsername;
+					String password = Main.databasePass;
+					Connection conn = DriverManager.getConnection(url, username, password);
+
+					DatabaseMetaData metadata = conn.getMetaData();
+					String[] types = { "TABLE" };
+					ResultSet resultSet = metadata.getTables(null, null, "%", types);
+
+					while (resultSet.next()) {
+						String tableName = resultSet.getString("TABLE_NAME");
+						if (!tableName.equalsIgnoreCase("trace_xe_action_map")
+								&& !tableName.equalsIgnoreCase("trace_xe_event_map")) {
+							JDBC.table.add(tableName);
+						}
+					}
+
+					// Close the connection
+					conn.close();
+				} catch (Exception ex) {
+				}
+				if(JDBC.table.isEmpty()) {
+					System.out.println("There is no Tables");
+				}
+				else {
+					JDBC.printTables();
+					System.out.print("\nEnter Table Name:  ");
+					tableName1 = sc.next();
+					JDBC.deleteTable();
+					JDBC.table.remove(tableName1);
+				}
 				break;
 			case "3":
 		    	System.out.println("Wait a moment :)");
@@ -91,10 +125,12 @@ public class Main {
 						System.out.println("\n\t\tThe Countries from Database");
 						System.out.println("\n************************************************************");
 						JDBC.printCountriesTable();
-						System.out.println("************************************************************");
-						System.out.println("\n\t\tThe University from Database");
-						System.out.println("\n************************************************************");
-						JDBC.printUniversityTable();
+						if(JDBC.table.contains("University")) {							
+							System.out.println("************************************************************");
+							System.out.println("\n\t\tThe University from Database");
+							System.out.println("\n************************************************************");
+							JDBC.printUniversityTable();
+						}
 						System.out.println("");
 					}
 				}
@@ -102,6 +138,35 @@ public class Main {
 					System.err.println("Entre Valid Input");
 				}
 				break;
+				
+			case "5":
+				APIConsumer.unversitiesHashList.clear();
+				APIConsumer.APIallCountries();
+				System.out.print("If the country has two word, WRITE it like ");			
+				System.err.println("'United+States'");
+				System.out.print("Enter name of country: ");
+				String countryName = sc.next();
+				for(int i=0; i<APIConsumer.unversitiesHashList.size(); i++) {
+					if(APIConsumer.unversitiesHashList.get(i).country.equalsIgnoreCase(countryName)) {
+		                System.out.print((i+1) + ".   University Name: " + APIConsumer.unversitiesHashList.get(i).name);
+		                System.out.print("\n     University Two Code: " + APIConsumer.unversitiesHashList.get(i).alpha_two_code);
+		                System.out.print("\n     University State-Province: " + APIConsumer.unversitiesHashList.get(i).state_province);
+		                System.out.print("\n     University Domains: ");
+		                for(int j=0; j<APIConsumer.unversitiesHashList.get(i).domains.length; j++) {                	
+		                	 System.out.print(APIConsumer.unversitiesHashList.get(i).domains[j] + ", ");
+		                }
+		                System.out.print("\n     University Web Page: ");
+		                for(int j=0; j<APIConsumer.unversitiesHashList.get(i).web_pages.length; j++) {                	
+		                	 System.out.print(APIConsumer.unversitiesHashList.get(i).web_pages[j] + ", ");
+		                }
+		                System.out.println("\n -------------------------------------------------------------------------------------------");
+					}
+				}
+				break;
+				
+				default:
+					System.err.println("Invalid Input");
+					break;
 			}
 
 		}

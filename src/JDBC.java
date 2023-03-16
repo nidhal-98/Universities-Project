@@ -1,9 +1,10 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class JDBC {
-	static ArrayList<String> table = new ArrayList<String>();
+	static HashSet<String> table = new HashSet<String>();
 
 	public static void countriesTable() {
 
@@ -282,6 +283,7 @@ public class JDBC {
 				if (!tableName.equalsIgnoreCase("trace_xe_action_map")
 						&& !tableName.equalsIgnoreCase("trace_xe_event_map")) {
 					System.out.println("Table Name:  " + tableName);
+					table.add(tableName);
 				}
 			}
 
